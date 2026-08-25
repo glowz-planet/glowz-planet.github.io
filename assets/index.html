@@ -1,349 +1,381 @@
 <!doctype html>
-<html lang="ja" data-brand="customer">
+<html lang="ja" data-brand="therapist">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>GLOWZ CUSTOMER — 特別な時間を、最高の出会いから。</title>
-<meta name="description" content="GLOWZ CUSTOMER — 理想のひとときを、ここから見つけよう。">
-<meta name="theme-color" content="#FFF7ED">
-<meta name="rating" content="adult">
+<title>GLOWZ THERAPIST — ホーム</title>
+<meta name="description" content="GLOWZ THERAPIST OS — あなたの魅力を輝かせ、理想の未来へ。">
+<meta name="theme-color" content="#FFF0F6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/glowz.css">
 <style>
-.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
-
-/* ---- ヘッダー ---------------------------------------------------------- */
-.hd{
-  position:sticky;top:0;z-index:40;
-  background:rgba(255,255,255,.8);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(255,255,255,.9);
+/* スマホの縦持ちが基準。PCで開いたときは中央に幅480pxで置いて、
+   まわりに端末の影をつける（実機の見え方をそのまま確認できるようにする） */
+.phone{
+  max-width:480px;margin:0 auto;min-height:100vh;
+  display:flex;flex-direction:column;position:relative;
 }
-.hd .in{display:flex;align-items:center;gap:14px;padding-block:11px}
-.hd .logo{font-size:calc(17px * var(--fs))}
-.hnav{display:flex;gap:4px;margin-left:18px}
-.hnav a{padding:8px 14px;border-radius:99px;font-size:calc(12.5px * var(--fs));font-weight:500;color:var(--ink-2);transition:background .18s,color .18s}
-.hnav a:hover,.hnav a.on{background:var(--accent-soft);color:var(--accent-ink)}
-.hact{margin-left:auto;display:flex;align-items:center;gap:8px}
-.icb{width:36px;height:36px;border-radius:50%;background:#fff;box-shadow:var(--sh-1);display:grid;place-items:center;color:var(--ink-2)}
-.icb .i{width:17px;height:17px}
-.burger{display:none}
-
-/* ---- ヒーロー ---------------------------------------------------------- */
-.hero{position:relative;overflow:hidden;padding-block:44px 40px}
-.hero .in{display:grid;grid-template-columns:1fr .82fr;gap:34px;align-items:center}
-.hero h1{
-  font-family:var(--font-h);font-weight:600;
-  font-size:clamp(26px, 4.4vw, 44px);line-height:1.42;letter-spacing:.03em;
-}
-.hero .lead{margin-top:12px;color:var(--ink-2);font-size:calc(13.5px * var(--fs))}
-
-/* 検索カード。ヒーローの中に置くと、開いた瞬間に「何をする所か」が伝わる */
-.search{margin-top:22px;max-width:470px}
-.tabs2{display:flex;gap:6px;background:var(--sv-1);padding:4px;border-radius:99px;margin-bottom:16px}
-.tabs2 button{flex:1;padding:9px;border-radius:99px;font-size:calc(12px * var(--fs));font-weight:600;letter-spacing:.08em;color:var(--ink-3);transition:.2s}
-.tabs2 button.on{background:#fff;color:var(--accent-ink);box-shadow:var(--sh-1)}
-
-/* 人物写真が入る枠。素材が届くまではパールとキラキラで埋める */
-.visual{position:relative;aspect-ratio:4/4.3;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-3)}
-.visual .bg{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(120% 90% at 70% 15%, rgba(255,255,255,.95), transparent 60%),
-    radial-gradient(90% 80% at 25% 80%, var(--pearl-glow), transparent 65%),
-    linear-gradient(160deg, #FDF6E9, #EFDFC4 55%, #E4E2DA);
-}
-.visual .pearl{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:44%;aspect-ratio:1}
-.visual .st{position:absolute;animation:twinkle 3.4s ease-in-out infinite;pointer-events:none}
-.visual .cap{position:absolute;left:0;right:0;bottom:0;padding:18px 20px;font-size:calc(11px * var(--fs));color:var(--accent-ink);background:linear-gradient(transparent,rgba(255,255,255,.85))}
-
-/* ---- ランキング -------------------------------------------------------- */
-.sec{padding-block:36px}
-.sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
-.sec-h h2{font-family:var(--font-h);font-size:calc(21px * var(--fs));font-weight:600}
-.sec-h a{margin-left:auto;font-size:calc(12px * var(--fs));color:var(--accent);font-weight:600}
-
-.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.cst{
-  background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.9);
-  border-radius:var(--r-l);padding:16px 12px 14px;text-align:center;
-  box-shadow:var(--sh-1);transition:transform .2s, box-shadow .25s;position:relative;
-}
-.cst:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
-.cst .no{
-  position:absolute;left:12px;top:12px;width:24px;height:24px;border-radius:9px;
-  display:grid;place-items:center;font-family:var(--font-h);font-size:11px;font-weight:700;color:#fff;
-  background:linear-gradient(135deg,var(--sv-3),var(--sv-4));
-}
-.cst:nth-child(1) .no{background:linear-gradient(135deg,#E8C77A,#C9A24B)}
-.cst:nth-child(2) .no{background:linear-gradient(135deg,#DDE1E7,#AEB4BE)}
-.cst:nth-child(3) .no{background:linear-gradient(135deg,#E2C0A0,#BF9A76)}
-.cst .av{width:82px;height:82px;margin:6px auto 11px;font-size:29px}
-.cst .n{font-size:calc(13px * var(--fs));font-weight:600}
-.cst .t{font-size:calc(10.5px * var(--fs));color:var(--accent-ink);margin-top:4px}
-.cst .st{font-size:calc(10px * var(--fs));color:var(--ink-3);margin-top:6px}
-
-/* ---- 安心の3つ ---------------------------------------------------------- */
-.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.trust > div{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.7);border-radius:var(--r-m);padding:16px 18px;border:1px solid rgba(255,255,255,.9)}
-.trust .e{width:34px;height:34px;flex:none;border-radius:11px;display:grid;place-items:center;color:var(--accent);background:linear-gradient(135deg,var(--accent-soft),#fff);border:1px solid rgba(255,255,255,.9)}
-.trust .i{width:17px;height:17px}
-.trust b{display:block;font-size:calc(12.5px * var(--fs))}
-.trust span{font-size:calc(11px * var(--fs));color:var(--ink-3)}
-
-/* ---- フッター ----------------------------------------------------------- */
-.ft{margin-top:24px;padding-block:28px 40px;border-top:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.55)}
-.ft .cols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:22px}
-.ft h4{font-size:calc(11.5px * var(--fs));margin-bottom:9px}
-.ft li a{font-size:calc(11.5px * var(--fs));color:var(--ink-3);line-height:2}
-.ft li a:hover{color:var(--accent-ink)}
-.ft .r18{
-  display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 14px;border-radius:99px;
-  background:#fff;border:1px solid var(--sv-2);font-size:calc(11px * var(--fs));color:var(--ink-2);
-}
-.ft .r18 b{color:#fff;background:var(--ng);border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-size:9px}
-
-/* 仮ビジュアルにキラキラを散らす。素材が入るまで、ここが空に見えないように */
-{
-  const v = document.getElementById('visual');
-  const star = 'M12 0 14.2 9.8 24 12 14.2 14.2 12 24 9.8 14.2 0 12 9.8 9.8Z';
-  for (let i = 0; i < 14; i++){
-    const s = document.createElement('span');
-    const sz = 5 + Math.random() * 12;
-    s.className = 'st';
-    s.style.cssText = `left:${8+Math.random()*84}%;top:${6+Math.random()*82}%;` +
-      `width:${sz}px;height:${sz}px;animation-delay:${(Math.random()*3.4).toFixed(2)}s`;
-    s.innerHTML = `<svg viewBox="0 0 24 24" width="100%" height="100%"><path d="${star}" fill="rgba(201,162,75,.55)"/></svg>`;
-    v.appendChild(s);
+@media (min-width:900px){
+  .phone{
+    margin:26px auto;min-height:calc(100vh - 52px);border-radius:38px;
+    box-shadow:var(--sh-3);overflow:hidden;background:rgba(255,255,255,.35);
+    backdrop-filter:blur(6px);
   }
 }
 
-/* ---- 年齢確認 -----------------------------------------------------------
-   風営法まわりの成人向けサービスの入口なので、最初にここを通す。
-   一度「はい」を押したら sessionStorage に残して、同じ訪問では出さない。 */
-.gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;
-  background:rgba(60,50,45,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.gate.off{display:none}
-.gate .box{max-width:400px;width:100%;text-align:center;padding:32px 26px}
-.gate .pearl{width:64px;height:64px;margin:0 auto 16px}
-.gate h2{font-family:var(--font-h);font-size:calc(19px * var(--fs));margin-bottom:10px}
-.gate p{font-size:calc(12px * var(--fs));color:var(--ink-2);line-height:1.85;margin-bottom:20px}
-.gate .btns{display:grid;gap:9px}
+/* ---- ヘッダー ---------------------------------------------------------- */
+.hd{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:10px;
+  padding:calc(12px + env(safe-area-inset-top)) 18px 12px;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.85);
+}
+.hd .logo{font-size:calc(16px * var(--fs))}
+.hd .r{margin-left:auto;display:flex;gap:8px}
+.hd .r button{width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:var(--sh-1);display:grid;place-items:center;color:var(--ink-2);position:relative}
+.hd .r .i{width:17px;height:17px}
+.hd .r b{position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;background:var(--accent);border:1.5px solid #fff}
 
-@media (max-width:980px){
-  .hero .in{grid-template-columns:1fr}
-  .visual{width:100%;max-width:380px;margin-inline:auto;order:-1;aspect-ratio:4/3.2}
-  .visual .pearl{width:34%}
-  .cards{grid-template-columns:repeat(3,1fr)}
-  .hnav{display:none}
-  .burger{display:grid}
-  .trust{grid-template-columns:1fr}
-  .ft .cols{grid-template-columns:1fr 1fr}
+.body{flex:1;padding:16px 16px 100px;display:flex;flex-direction:column;gap:13px}
+.view{display:none;flex-direction:column;gap:13px}
+.view.on{display:flex;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ---- あいさつ ---------------------------------------------------------- */
+.hello{display:flex;align-items:center;gap:12px;padding:2px 4px}
+.hello .av{width:46px;height:46px;font-size:17px}
+.hello h1{font-size:calc(15px * var(--fs));font-weight:600}
+.hello .sub{font-size:calc(11px * var(--fs));color:var(--ink-3)}
+
+/* ---- スケジュール行 ---------------------------------------------------- */
+.sc{display:flex;align-items:center;gap:11px;padding:9px 0}
+.sc + .sc{border-top:1px dashed var(--sv-2)}
+.sc .tm{font-family:var(--font-h);font-weight:600;font-size:calc(13px * var(--fs));width:56px;flex:none}
+.sc .mn{font-size:calc(11.5px * var(--fs));color:var(--ink-2)}
+.sc .tp{margin-left:auto}
+
+/* ---- 売上と目標 -------------------------------------------------------- */
+.goal{display:flex;align-items:center;gap:16px}
+.goal .ringwrap{position:relative;width:88px;height:88px;flex:none}
+.goal .ringwrap canvas{width:88px;height:88px}
+.goal .ringwrap span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-h);font-weight:600;font-size:calc(19px * var(--fs));color:var(--accent-ink)}
+.goal .big{font-family:var(--font-h);font-size:calc(25px * var(--fs));font-weight:600;line-height:1.2}
+
+/* ---- 報酬の内訳 -------------------------------------------------------- */
+.brk{display:flex;justify-content:space-between;padding:7px 0;font-size:calc(12px * var(--fs))}
+.brk + .brk{border-top:1px solid var(--sv-1)}
+.brk b{font-family:var(--font-h);font-weight:600}
+
+/* ---- 機能タイル（6つ）-------------------------------------------------- */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.tile{
+  background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.9);
+  border-radius:var(--r-m);padding:13px 6px 11px;text-align:center;
+  box-shadow:var(--sh-1);transition:transform .16s, box-shadow .2s;
 }
-@media (max-width:560px){
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .sec{padding-block:26px}
-  .hero{padding-block:26px 20px}
-  .ft .cols{grid-template-columns:1fr}
+.tile:active{transform:scale(.96)}
+.tile:hover{box-shadow:var(--sh-2)}
+.tile .e{
+  width:34px;height:34px;margin:0 auto 7px;border-radius:12px;display:grid;place-items:center;
+  color:var(--accent);background:linear-gradient(135deg,var(--accent-soft),#fff);
+  border:1px solid rgba(255,255,255,.9);
 }
+.tile .i{width:17px;height:17px}
+.tile .n{display:block;font-size:calc(11px * var(--fs));font-weight:600;line-height:1.35}
+.tile .d{display:block;font-size:calc(9.5px * var(--fs));color:var(--ink-3);margin-top:3px;line-height:1.4}
+
+/* ---- AIカード ---------------------------------------------------------- */
+.aicard{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg, rgba(255,255,255,.92), var(--accent-soft));
+  border:1px solid rgba(255,255,255,.95);
+}
+.aicard .orb{position:absolute;right:-26px;bottom:-30px;width:120px;height:120px;opacity:.5}
+.aicard p{font-size:calc(12px * var(--fs));color:var(--ink-2);line-height:1.75;position:relative}
+
+/* ---- お客様メモ -------------------------------------------------------- */
+.memo{display:flex;gap:10px;align-items:flex-start;padding:9px 0}
+.memo + .memo{border-top:1px solid var(--sv-1)}
+.memo .av{width:32px;height:32px;font-size:12px}
+
+/* ---- タブバー ---------------------------------------------------------- */
+.tabs{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  max-width:480px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  background:rgba(255,255,255,.9);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-top:1px solid rgba(255,255,255,.9);
+  padding:7px 4px calc(7px + env(safe-area-inset-bottom));
+  box-shadow:0 -6px 24px rgba(120,110,135,.10);
+}
+@media (min-width:900px){ .tabs{bottom:26px;border-radius:0 0 38px 38px;max-width:480px} }
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 2px;border-radius:14px;color:var(--ink-3);transition:color .2s}
+.tab .e{display:flex;line-height:1}
+.tab .i{width:21px;height:21px}
+.tab span{font-size:calc(9.5px * var(--fs));font-weight:600}
+.tab.on{color:var(--accent)}
+.tab.on .e{transform:translateY(-1px);filter:drop-shadow(0 3px 6px rgba(242,82,156,.35))}
+
+/* ---- 売上・報酬ビュー -------------------------------------------------- */
+#mchart{width:100%;height:180px}
+/* 一覧の行の頭に置くアイコン枠 */
+.rowbox{width:26px;height:26px;flex:none;border-radius:8px;border:1px solid var(--sv-2);
+  display:grid;place-items:center;background:#fff;color:var(--accent)}
+.stat2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat2 > div{background:var(--accent-soft);border-radius:var(--r-m);padding:11px 13px}
+.stat2 .kpi-v{font-size:calc(20px * var(--fs))}
+
+/* ---- スケジュールビュー ------------------------------------------------ */
+.days{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.day{
+  flex:none;width:52px;text-align:center;padding:9px 0;border-radius:14px;
+  background:#fff;box-shadow:var(--sh-1);font-size:calc(10px * var(--fs));color:var(--ink-3);
+}
+.day b{display:block;font-family:var(--font-h);font-size:calc(16px * var(--fs));color:var(--ink-1);font-weight:600}
+.day.on{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:rgba(255,255,255,.85)}
+.day.on b{color:#fff}
 </style>
 </head>
 <body>
+<div class="phone">
 
-<header class="hd">
-  <div class="wrap in">
+  <header class="hd">
     <div class="planet" style="width:24px;height:24px"><div class="pearl" style="width:19px;height:19px"></div><i class="ring"></i></div>
     <div>
       <div class="logo">GLOWZ</div>
-      <div class="logo-sub">CUSTOMER</div>
+      <div class="logo-sub">THERAPIST</div>
     </div>
-    <nav class="hnav">
-      <a href="#" class="on">探す</a>
-      <a href="#rank">ランキング</a>
-      <a href="#">キャンペーン</a>
-      <a href="#">初めての方へ</a>
-    </nav>
-    <div class="hact">
-      <button class="icb" aria-label="検索"><svg class="i"><use href="#i-search"/></svg></button>
-      <button class="icb" aria-label="ログイン"><svg class="i"><use href="#i-user"/></svg></button>
-      <button class="btn btn-1 sm" style="letter-spacing:.06em">会員登録</button>
-      <button class="icb burger" aria-label="メニュー"><svg class="i"><use href="#i-menu"/></svg></button>
+    <div class="r">
+      <button aria-label="お知らせ"><svg class="i"><use href="#i-bell"/></svg><b></b></button>
+      <button aria-label="メッセージ"><svg class="i"><use href="#i-message"/></svg></button>
     </div>
-  </div>
-</header>
+  </header>
 
-<section class="hero">
-  <div class="wrap in">
-    <div>
-      <h1>特別な時間を、<br>最高の出会いから。</h1>
-      <p class="lead">理想のひとときを、ここから見つけよう。</p>
+  <div class="body">
 
-      <div class="card search">
-        <div class="tabs2">
-          <button class="on" data-sex="men">FOR MEN</button>
-          <button data-sex="women">FOR WOMEN</button>
+    <!-- ============ ホーム ============ -->
+    <section class="view on" data-v="home">
+      <div class="hello">
+        <span class="av">花</span>
+        <div>
+          <h1>おはようございます、山田 花子さん</h1>
+          <div class="sub">ID 0005687 ・ <span class="badge vip">VIP</span></div>
         </div>
-        <div class="field">
-          <label for="area">エリアを選択</label>
-          <select class="sel" id="area">
-            <option>東京都</option><option>神奈川県</option><option>大阪府</option>
-            <option>愛知県</option><option>福岡県</option><option>北海道</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="date">日時を選択</label>
-          <select class="sel" id="date">
-            <option>6月1日（土） 20:00〜</option>
-            <option>6月1日（土） 22:00〜</option>
-            <option>6月2日（日） 18:00〜</option>
-            <option>今すぐ</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="type">タイプを選択</label>
-          <select class="sel" id="type">
-            <option>すべてのタイプ</option><option>癒し系</option><option>お姉さん系</option>
-            <option>清楚系</option><option>ギャル系</option>
-          </select>
-        </div>
-        <button class="btn btn-1 w" id="go">検索する</button>
-        <p class="tiny muted center" style="margin-top:10px">現在 <b id="cnt">0</b> 名が予約受付中です</p>
       </div>
-    </div>
 
-    <!-- 人物写真が入る枠。<img> を1行足せばそのまま差しかわる -->
-    <div class="visual" id="visual">
-      <div class="bg"></div>
-      <div class="pearl"></div>
-      <div class="cap">※ メインビジュアルは素材差しかえ用の仮置きです</div>
-    </div>
-  </div>
-</section>
-
-<section class="sec wrap" id="rank">
-  <div class="sec-h">
-    <h2>人気ランキング</h2>
-    <span class="tiny muted">週間 ・ 東京都</span>
-    <a href="#">すべて見る ›</a>
-  </div>
-  <div class="cards" id="cards"></div>
-</section>
-
-<section class="sec wrap">
-  <div class="trust">
-    <div>
-      <span class="e"><svg class="i"><use href="#i-shield"/></svg></span>
-      <div><b>安心・安全への取り組み</b><span>身分確認・衛生管理を徹底しています</span></div>
-    </div>
-    <div>
-      <span class="e"><svg class="i"><use href="#i-lock"/></svg></span>
-      <div><b>プライバシー保護</b><span>個人情報は厳重に管理しています</span></div>
-    </div>
-    <div>
-      <span class="e"><svg class="i"><use href="#i-clock"/></svg></span>
-      <div><b>24時間サポート</b><span>いつでもサポート対応いたします</span></div>
-    </div>
-  </div>
-</section>
-
-<footer class="ft">
-  <div class="wrap cols">
-    <div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div class="planet" style="width:24px;height:24px"><div class="pearl" style="width:19px;height:19px"></div><i class="ring"></i></div>
-        <div><div class="logo">GLOWZ</div><div class="logo-sub">by Glowz Planet</div></div>
+      <div class="card">
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-calendar"/></svg></span>本日のスケジュール<a href="#" class="card-more" data-go="sched">すべて ›</a></div>
+        <div class="sc"><span class="tm">14:00</span><span><span class="nm">90分コース</span><br><span class="mn">佐藤 A様</span></span><span class="tp"><span class="badge hot">本指名</span></span></div>
+        <div class="sc"><span class="tm">16:30</span><span><span class="nm">120分コース</span><br><span class="mn">鈴木 B様</span></span><span class="tp"><span class="badge rec">場内指名</span></span></div>
+        <div class="sc"><span class="tm">19:00</span><span><span class="nm">90分コース</span><br><span class="mn">高橋 C様</span></span><span class="tp"><span class="badge hot">本指名</span></span></div>
+        <button class="btn btn-3 w sm" style="margin-top:12px" data-go="sched">＋ 追加予約を確認</button>
       </div>
-      <p class="tiny muted" style="margin-top:12px">人とビジネスの成長を支えるプラットフォーム</p>
-      <div class="r18"><b>18</b>18歳未満の方はご利用いただけません</div>
-    </div>
-    <div><h4>サービス</h4><ul><li><a href="#">探す</a></li><li><a href="#">ランキング</a></li><li><a href="#">キャンペーン</a></li><li><a href="#">初めての方へ</a></li></ul></div>
-    <div><h4>ヘルプ</h4><ul><li><a href="#">よくある質問</a></li><li><a href="#">お問い合わせ</a></li><li><a href="#">安心・安全への取り組み</a></li></ul></div>
-    <div><h4>運営</h4><ul><li><a href="#">利用規約</a></li><li><a href="#">プライバシーポリシー</a></li><li><a href="#">特定商取引法に基づく表記</a></li><li><a href="../index.html">ブランド一覧</a></li></ul></div>
-  </div>
-</footer>
 
-<!-- 年齢確認 -->
-<div class="gate" id="gate">
-  <div class="card box">
-    <div class="pearl"></div>
-    <h2>年齢確認</h2>
-    <p>当サイトは成人向けのサービスを取り扱っています。<br>
-    <b>18歳未満（高校生を含む）</b>の方はご利用いただけません。<br>
-    あなたは18歳以上ですか？</p>
-    <div class="btns">
-      <button class="btn btn-1 w" id="yes">はい（18歳以上です）</button>
-      <button class="btn btn-2 w" id="no">いいえ</button>
-    </div>
+      <div class="card">
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-wallet"/></svg></span>今月の売上<a href="#" class="card-more" data-go="pay">明細 ›</a></div>
+        <div class="goal">
+          <div class="ringwrap"><canvas id="g1"></canvas><span>85%</span></div>
+          <div>
+            <div class="big">¥1,285,000</div>
+            <div class="tiny muted">目標 ¥1,500,000</div>
+            <div style="margin-top:7px"><span class="delta up">▲ 16.8%</span></div>
+            <div class="tiny" style="margin-top:6px">目標達成まで <b class="serif">¥215,000</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tiles">
+        <button class="tile" data-go="sched"><span class="e"><svg class="i"><use href="#i-calendar"/></svg></span><span class="n">スケジュール</span><span class="d">出勤・シフト確認</span></button>
+        <button class="tile" data-go="pay"><span class="e"><svg class="i"><use href="#i-bars"/></svg></span><span class="n">売上・報酬</span><span class="d">売上と報酬を確認</span></button>
+        <button class="tile"><span class="e"><svg class="i"><use href="#i-target"/></svg></span><span class="n">目標管理</span><span class="d">目標設定と達成度</span></button>
+        <button class="tile"><span class="e"><svg class="i"><use href="#i-note"/></svg></span><span class="n">顧客メモ</span><span class="d">お客様情報を管理</span></button>
+        <button class="tile"><span class="e"><svg class="i"><use href="#i-sparkle"/></svg></span><span class="n">AIアシスタント</span><span class="d">あなたをサポート</span></button>
+        <button class="tile"><span class="e"><svg class="i"><use href="#i-crown"/></svg></span><span class="n">ランキング</span><span class="d">順位をチェック</span></button>
+      </div>
+
+      <div class="card">
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-note"/></svg></span>今月の報酬見込み</div>
+        <div class="serif" style="font-size:calc(23px * var(--fs));font-weight:600;margin-bottom:8px">¥985,000</div>
+        <div class="brk"><span class="muted">基本給</span><b>¥350,000</b></div>
+        <div class="brk"><span class="muted">歩合</span><b>¥530,000</b></div>
+        <div class="brk"><span class="muted">指名料</span><b>¥105,000</b></div>
+        <button class="btn btn-2 w sm" style="margin-top:12px" data-go="pay">詳細を確認</button>
+      </div>
+
+      <div class="card">
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-mail"/></svg></span>お客様メモ<a href="#" class="card-more">一覧を見る ›</a></div>
+        <div class="memo"><span class="av">佐</span><span><span class="nm sm">佐藤 A様</span><br><span class="tiny muted">次回は 6/5 16:00〜</span></span></div>
+        <div class="memo"><span class="av">鈴</span><span><span class="nm sm">鈴木 B様</span><br><span class="tiny muted">アロマが好き・話し上手</span></span></div>
+        <div class="memo"><span class="av">高</span><span><span class="nm sm">高橋 C様</span><br><span class="tiny muted">誕生日 6/12</span></span></div>
+      </div>
+
+      <div class="card aicard">
+        <div class="pearl orb"></div>
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-sparkle"/></svg></span>AIアシスタントからのアドバイス</div>
+        <p>今週の売上は先週比 <b>＋18%</b> です✨<br>
+        土日の出勤を増やすと、目標達成の確率が上がります。<br>
+        リピーターの <b>佐藤 A様</b> にお礼メッセージを送ってみませんか？</p>
+        <button class="btn btn-1 w sm" style="margin-top:13px">メッセージを作る</button>
+      </div>
+    </section>
+
+    <!-- ============ スケジュール ============ -->
+    <section class="view" data-v="sched">
+      <h1 class="serif" style="font-size:calc(19px * var(--fs));padding:2px 4px">スケジュール</h1>
+      <div class="days" id="days"></div>
+      <div class="card">
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-clock"/></svg></span>6月1日（土）の予定</div>
+        <div id="slots"></div>
+      </div>
+      <div class="card">
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-bars"/></svg></span>今月の出勤</div>
+        <div class="stat2">
+          <div><div class="kpi-l">出勤日数</div><div class="kpi-v">18<span class="u">日</span></div></div>
+          <div><div class="kpi-l">本指名</div><div class="kpi-v">42<span class="u">件</span></div></div>
+        </div>
+      </div>
+      <button class="btn btn-1 w">出勤希望を出す</button>
+    </section>
+
+    <!-- ============ 売上・報酬 ============ -->
+    <section class="view" data-v="pay">
+      <h1 class="serif" style="font-size:calc(19px * var(--fs));padding:2px 4px">売上・報酬</h1>
+      <div class="card">
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-chart"/></svg></span>売上推移<span class="tiny muted" style="font-weight:400">（2026年5月）</span></div>
+        <div class="serif" style="font-size:calc(25px * var(--fs));font-weight:600">¥<span id="m1">0</span></div>
+        <div style="margin-bottom:6px"><span class="delta up">▲ 16.8%</span> <span class="tiny muted">前月比</span></div>
+        <canvas id="mchart"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-target"/></svg></span>指標</div>
+        <div class="stat2">
+          <div><div class="kpi-l">平均単価</div><div class="kpi-v">¥22,928</div></div>
+          <div><div class="kpi-l">新規率</div><div class="kpi-v">48<span class="u">人</span></div></div>
+          <div><div class="kpi-l">リピート率</div><div class="kpi-v">62<span class="u">%</span></div></div>
+          <div><div class="kpi-l">口コミ評価</div><div class="kpi-v">4.8<span class="u">★</span></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-note"/></svg></span>報酬内訳</div>
+        <div class="brk"><span class="muted">基本給</span><b>¥350,000</b></div>
+        <div class="brk"><span class="muted">歩合（55%）</span><b>¥530,000</b></div>
+        <div class="brk"><span class="muted">指名料</span><b>¥105,000</b></div>
+        <div class="brk" style="border-top:1.5px solid var(--sv-3)"><span style="font-weight:600">合計</span><b style="font-size:calc(15px * var(--fs));color:var(--accent-ink)">¥985,000</b></div>
+      </div>
+    </section>
+
+    <!-- ============ メッセージ ============ -->
+    <section class="view" data-v="msg">
+      <h1 class="serif" style="font-size:calc(19px * var(--fs));padding:2px 4px">メッセージ</h1>
+      <div class="card aicard">
+        <div class="pearl orb"></div>
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-sparkle"/></svg></span>おすすめのメッセージ</div>
+        <div style="background:#fff;border-radius:var(--r-m);padding:13px 15px;font-size:calc(12px * var(--fs));line-height:1.85;position:relative">
+          山田様<br>こんにちは♡<br>GLOWZです✨<br>
+          お久しぶりにお会いできたら嬉しいです♪<br>
+          今週はご都合いかがですか？<br>
+          リラックスできるお時間をご用意しております💗
+        </div>
+        <button class="btn btn-1 w sm" style="margin-top:12px">メッセージをコピー</button>
+      </div>
+      <div class="card">
+        <div class="card-t"><span class="ico"><svg class="i"><use href="#i-mail"/></svg></span>おすすめアクション</div>
+        <div class="row"><span class="rowbox"><svg class="i"><use href="#i-mail"/></svg></span><span class="nm">リピーター向けメッセージ送信</span></div>
+        <div class="row"><span class="rowbox"><svg class="i"><use href="#i-star"/></svg></span><span class="nm">口コミ返信をする</span></div>
+        <div class="row"><span class="rowbox"><svg class="i"><use href="#i-calendar"/></svg></span><span class="nm">出勤シフトを最適化する</span></div>
+      </div>
+    </section>
+
+    <!-- ============ メニュー ============ -->
+    <section class="view" data-v="menu">
+      <h1 class="serif" style="font-size:calc(19px * var(--fs));padding:2px 4px">メニュー</h1>
+      <div class="card">
+        <div class="hello" style="padding:0">
+          <span class="av">花</span>
+          <div><h1>山田 花子</h1><div class="sub">ID 0005687 ・ <span class="badge vip">VIP</span></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="row"><span class="rowi"><svg class="i"><use href="#i-user"/></svg></span><span class="nm">プロフィール編集</span></div>
+        <div class="row"><span class="rowi"><svg class="i"><use href="#i-target"/></svg></span><span class="nm">目標を設定する</span></div>
+        <div class="row"><span class="rowi"><svg class="i"><use href="#i-crown"/></svg></span><span class="nm">ランキング</span></div>
+        <div class="row"><span class="rowi"><svg class="i"><use href="#i-star"/></svg></span><span class="nm">口コミ・評価管理</span></div>
+        <div class="row"><span class="rowi"><svg class="i"><use href="#i-bell"/></svg></span><span class="nm">お知らせ設定</span></div>
+        <div class="row"><span class="rowi"><svg class="i"><use href="#i-gear"/></svg></span><span class="nm">設定</span></div>
+      </div>
+      <a href="../index.html" class="btn btn-2 w sm">← ブランド一覧へ</a>
+    </section>
+
   </div>
+
+  <nav class="tabs">
+    <button class="tab on" data-go="home"><span class="e"><svg class="i"><use href="#i-home"/></svg></span><span>ホーム</span></button>
+    <button class="tab" data-go="sched"><span class="e"><svg class="i"><use href="#i-calendar"/></svg></span><span>スケジュール</span></button>
+    <button class="tab" data-go="pay"><span class="e"><svg class="i"><use href="#i-bars"/></svg></span><span>売上・報酬</span></button>
+    <button class="tab" data-go="msg"><span class="e"><svg class="i"><use href="#i-message"/></svg></span><span>メッセージ</span></button>
+    <button class="tab" data-go="menu"><span class="e"><svg class="i"><use href="#i-menu"/></svg></span><span>メニュー</span></button>
+  </nav>
 </div>
 
 <script src="../assets/icons.js"></script>
 <script src="../assets/glowz.js"></script>
 <script>
-const CASTS = [
-  { n:'桜井 みなみ', t:'人気急上昇',    s:'★4.9 ・ 口コミ 128件' },
-  { n:'一ノ瀬 莉子', t:'本指名多数',    s:'★4.9 ・ 口コミ 214件' },
-  { n:'白石 りな',   t:'リピーター多数', s:'★4.8 ・ 口コミ 176件' },
-  { n:'美咲 れいか', t:'新人おすすめ',  s:'★4.8 ・ 口コミ 42件'  },
-  { n:'天音 あい',   t:'満足度No.1',    s:'★5.0 ・ 口コミ 98件'  },
-];
-document.getElementById('cards').innerHTML = CASTS.map((c, i) => `
-  <a href="#" class="cst">
-    <span class="no">${i+1}</span>
-    <span class="av">${c.n[0]}</span>
-    <div class="n">${c.n}</div>
-    <div class="t">${c.t}</div>
-    <div class="st">${c.s}</div>
-  </a>`).join('');
-
-countUp(document.getElementById('cnt'), 142);
-
-/* FOR MEN / FOR WOMEN でタイプの選択肢が変わる。
-   男女共通プラットフォームであることが、ここで初めて目に見える */
-const TYPES = {
-  men:   ['すべてのタイプ','癒し系','お姉さん系','清楚系','ギャル系'],
-  women: ['すべてのタイプ','優しい系','爽やか系','大人系','年下系'],
-};
-document.querySelectorAll('.tabs2 button').forEach(b => b.onclick = () => {
-  document.querySelectorAll('.tabs2 button').forEach(x => x.classList.toggle('on', x === b));
-  document.getElementById('type').innerHTML =
-    TYPES[b.dataset.sex].map(t => `<option>${t}</option>`).join('');
+/* ---- 画面の切りかえ -----------------------------------------------------
+   タブだけでなくカードの「すべて ›」からも飛べるようにする。
+   閉じるボタンを置かずに済み、画面が1まいずつ入れかわる。 */
+function go(v){
+  document.querySelectorAll('.view').forEach(s => s.classList.toggle('on', s.dataset.v === v));
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.go === v));
+  document.querySelector('.body').scrollTo?.(0, 0);
+  window.scrollTo(0, 0);
+  draw();   // 隠れているCanvasは幅0で描けないので、出してから描きなおす
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-go]');
+  if (t){ e.preventDefault(); go(t.dataset.go); }
 });
 
-document.getElementById('go').onclick = () => {
-  const a = area.value, d = date.value, t = type.value;
-  alert(`検索：${a} / ${d} / ${t}\n\n（一覧画面はこの次に作ります）`);
-};
+/* ---- 日付の帯 ------------------------------------------------------------ */
+const W = ['日','月','火','水','木','金','土'];
+document.getElementById('days').innerHTML = Array.from({length:14}, (_, i) => {
+  const d = new Date(2026, 5, 1 + i);
+  return `<div class="day ${i===0?'on':''}">${W[d.getDay()]}<b>${d.getDate()}</b></div>`;
+}).join('');
 
-/* 仮ビジュアルにキラキラを散らす。素材が入るまで、ここが空に見えないように */
-{
-  const v = document.getElementById('visual');
-  const star = 'M12 0 14.2 9.8 24 12 14.2 14.2 12 24 9.8 14.2 0 12 9.8 9.8Z';
-  for (let i = 0; i < 14; i++){
-    const s = document.createElement('span');
-    const sz = 5 + Math.random() * 12;
-    s.className = 'st';
-    s.style.cssText = `left:${8+Math.random()*84}%;top:${6+Math.random()*82}%;` +
-      `width:${sz}px;height:${sz}px;animation-delay:${(Math.random()*3.4).toFixed(2)}s`;
-    s.innerHTML = `<svg viewBox="0 0 24 24" width="100%" height="100%"><path d="${star}" fill="rgba(201,162,75,.55)"/></svg>`;
-    v.appendChild(s);
+const SLOTS = [
+  { t:'12:00', n:'蓮 (Ren)',      c:'90分コース',  a:'¥16,000', s:'出勤中' },
+  { t:'14:00', n:'翔 (Syo)',      c:'90分コース',  a:'¥15,000', s:'出勤中' },
+  { t:'16:00', n:'湊 (Minato)',   c:'120分コース', a:'¥19,000', s:'調整中' },
+  { t:'18:00', n:'律 (Ritsu)',    c:'90分コース',  a:'¥14,000', s:'出勤中' },
+  { t:'20:00', n:'大和 (Yamato)', c:'120分コース', a:'¥17,000', s:'出勤中' },
+];
+document.getElementById('slots').innerHTML = SLOTS.map(s => `
+  <div class="sc">
+    <span class="tm">${s.t}</span>
+    <span><span class="nm">${s.n}</span><br><span class="mn">${s.c} ・ ${s.a}</span></span>
+    <span class="tp"><span class="badge ${s.s==='出勤中'?'ok':'rec'}">${s.s}</span></span>
+  </div>`).join('');
+
+/* ---- 月の売上 ------------------------------------------------------------ */
+const M = [62,58,71,66,79,74,88, 84,79,92,88,101,96,110, 104,99,112,108,121,116,130, 124,119,132,128,141,136,150, 144,158]
+  .map((v, i) => ({ l:`5/${i+1}`, v: v * 8500 }));
+
+let done = false;
+function draw(){
+  ring(document.getElementById('g1'), 85, { thick:9 });
+  lineChart(document.getElementById('mchart'), M, { pad:{l:38,r:6,t:8,b:20} });
+  if (!done && document.querySelector('[data-v="pay"]').classList.contains('on')){
+    done = true;
+    countUp(document.getElementById('m1'), 1285000);
   }
 }
-
-/* ---- 年齢確認 ------------------------------------------------------------
-   sessionStorage にしてあるのは、タブを閉じたらまた確認するため。
-   localStorage だと共用端末で次の人にも「確認済み」が引きつがれる。 */
-const gate = document.getElementById('gate');
-if (sessionStorage.getItem('glowz.age') === 'ok') gate.classList.add('off');
-document.getElementById('yes').onclick = () => {
-  sessionStorage.setItem('glowz.age', 'ok');
-  gate.classList.add('off');
-};
-document.getElementById('no').onclick = () => {
-  location.href = 'https://www.google.co.jp/';
-};
+onDraw(draw);
 </script>
 </body>
 </html>
